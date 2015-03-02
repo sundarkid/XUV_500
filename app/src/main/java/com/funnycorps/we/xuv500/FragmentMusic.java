@@ -4,12 +4,10 @@ package com.funnycorps.we.xuv500;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.graphics.BitmapFactory;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
-import android.support.v7.widget.LinearLayoutCompat;
 import android.view.LayoutInflater;
 import android.support.v4.app.Fragment;
 import android.view.View;
@@ -19,7 +17,6 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
-import android.widget.ProgressBar;
 import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -91,31 +88,14 @@ public class FragmentMusic extends Fragment implements MediaPlayer.OnCompletionL
         utils = new Utilities();
 
         if (Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED))
-            songManager = new SongsManager(Environment.getExternalStorageDirectory() + "/");
+            songManager = new SongsManager(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_MUSIC));
         else
-            songManager = new SongsManager(Environment.getDataDirectory() + "");
+            songManager = new SongsManager(Environment.getDataDirectory());
         songsList = songManager.getPlayList();
-        if (songsList == null || songsList.size() == 0) { f=0;}
+        if (songsList == null || songsList.size() == 0) { f=0;
+        }
         else
         { f=1;
-            //Toast.makeText(getActivity().getApplicationContext(), "errr", Toast.LENGTH_LONG).show();
-/*
-            AlertDialog.Builder alertDialog = new AlertDialog.Builder(getActivity());
-            // Setting Dialog Title
-            alertDialog.setTitle("Songs Unavailable in extsdcard/");
-            // Setting Dialog Message
-            alertDialog.setMessage("Since this is an evaluation Project the songs source is set to extsdcard/.Please add songs to that directory");
-            // Setting Positive "Yes" Button
-            alertDialog.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
-                public void onClick(DialogInterface dialog,int which) {
-                }
-            });
-           // Showing Alert Message
-            alertDialog.show();*/
-
-
-
-
             String[] names = new String[songsList.size()];
             for (int i = 0; i < songsList.size(); i++) {
                 names[i] = songsList.get(i).get("songTitle");
@@ -130,6 +110,7 @@ public class FragmentMusic extends Fragment implements MediaPlayer.OnCompletionL
                     return view1;
                 }
             };
+
             currentPlayList.setAdapter(adapter);
             currentPlayList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
@@ -147,6 +128,22 @@ public class FragmentMusic extends Fragment implements MediaPlayer.OnCompletionL
             @Override
             public void onClick(View arg0) {
                 // check for already playing
+                if (songsList == null || songsList.size() == 0) { f=0;
+                    Toast.makeText(getActivity().getApplicationContext(), "errr", Toast.LENGTH_LONG).show();
+                    AlertDialog.Builder alertDialog = new AlertDialog.Builder(getActivity());
+                    // Setting Dialog Title
+                    alertDialog.setTitle("Songs Unavailable in sdcard/");
+                    // Setting Dialog Message
+                    alertDialog.setMessage("Add songs to that directory" +
+                            ".\nsdcard/Music");
+                    // Setting Positive "Yes" Button
+                    alertDialog.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog,int which) {
+                        }
+                    });
+                    // Showing Alert Message
+                    alertDialog.show();
+                }
 
                 if(mp.isPlaying()){
                     if(mp!=null){

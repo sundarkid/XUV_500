@@ -1,9 +1,6 @@
 package com.funnycorps.we.xuv500;
 
 
-import android.content.Context;
-import android.os.Environment;
-import android.widget.Toast;
 
 import java.io.File;
 import java.io.FilenameFilter;
@@ -14,11 +11,11 @@ import java.util.HashMap;
 
 public class SongsManager {
     // SDCard Path
-    String MEDIA_PATH ;//= new String("/sdcard/");
+    File MEDIA_PATH ;//= new String("/sdcard/");
     private ArrayList<HashMap<String, String>> songsList = new ArrayList<HashMap<String, String>>();
     // Constructor
     public SongsManager(){}
-    public SongsManager(String S){
+    public SongsManager(File S){
         MEDIA_PATH=S;
     }
 
@@ -30,7 +27,7 @@ public class SongsManager {
 
         File home;
         try {
-            home = new File(MEDIA_PATH);
+            home = MEDIA_PATH;
 
         }catch(Exception e)
         {
