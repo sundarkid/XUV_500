@@ -17,6 +17,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.RadioGroup;
 import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -35,7 +36,7 @@ public class FragmentMusic extends Fragment implements MediaPlayer.OnCompletionL
 
     int f;
     Context context;
-    ImageView repeat,shuffle,play,next,previous;
+    ImageView repeat,shuffle,play,next,previous,source;
     TextView songTitleLabel;
     SeekBar songProgressBar;
     Utilities utils;
@@ -66,6 +67,7 @@ public class FragmentMusic extends Fragment implements MediaPlayer.OnCompletionL
         play = (ImageView) view.findViewById(R.id.imageViewPlay);
         next = (ImageView) view.findViewById(R.id.imageViewNext);
         previous = (ImageView) view.findViewById(R.id.imageViewPrevious);
+        source = (ImageView) view.findViewById(R.id.imageViewSelectSource);
         linearLayoutMusicControls = (LinearLayout) view.findViewById(R.id.linearLayoutMusicControls);
 
         songTitleLabel = (TextView) view.findViewById(R.id.textViewSongName);
@@ -116,7 +118,6 @@ public class FragmentMusic extends Fragment implements MediaPlayer.OnCompletionL
                 @Override
                 public void onItemClick(AdapterView<?> arg0, View arg1, int position, long arg3) {
                     playSong(position);
-                    Toast.makeText(getActivity().getApplicationContext(), "" + position, Toast.LENGTH_SHORT).show();
                     // Passing the selected music from the list.
                 }
             });}
@@ -129,7 +130,6 @@ public class FragmentMusic extends Fragment implements MediaPlayer.OnCompletionL
             public void onClick(View arg0) {
                 // check for already playing
                 if (songsList == null || songsList.size() == 0) { f=0;
-                    Toast.makeText(getActivity().getApplicationContext(), "errr", Toast.LENGTH_LONG).show();
                     AlertDialog.Builder alertDialog = new AlertDialog.Builder(getActivity());
                     // Setting Dialog Title
                     alertDialog.setTitle("Songs Unavailable in sdcard/");
@@ -164,6 +164,42 @@ public class FragmentMusic extends Fragment implements MediaPlayer.OnCompletionL
             }
         });
 
+        // Selecting Source Dialog
+    /*    source.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                View SrcDialog;
+                LayoutInflater layoutInflater = (LayoutInflater) getActivity().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+                AlertDialog.Builder alert = new AlertDialog.Builder(getActivity());
+                SrcDialog = layoutInflater.inflate(R.layout.music_source,null);
+                RadioGroup radioGroup = (RadioGroup)SrcDialog.findViewById(R.id.radioGroupSrcSelect);
+                radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+                    @Override
+                    public void onCheckedChanged(RadioGroup radioGroup, int i) {
+                        switch (i){
+                            case R.id.radioButtonCD:
+                                Toast.makeText(getActivity(),"Cd selected",Toast.LENGTH_SHORT).show();
+                                break;
+                            case R.id.radioButtonUSB:
+                                Toast.makeText(getActivity(),"USB Selected",Toast.LENGTH_SHORT).show();
+                                break;
+                            case R.id.radioButtonIpod:
+                                Toast.makeText(getActivity(),"Ipod Selected",Toast.LENGTH_SHORT).show();
+                                break;
+                            case R.id.radioButtonBTMusic:
+                                Toast.makeText(getActivity(),"BT Music selected",Toast.LENGTH_SHORT).show();
+                                break;
+                            case R.id.radioButtonAux:
+                                Toast.makeText(getActivity(),"Aux selected",Toast.LENGTH_SHORT).show();
+                                break;
+                        }
+                    }
+                });
+                alert.setView(SrcDialog);
+                alert.show();
+            }
+        });
+        */
 
 
         /**

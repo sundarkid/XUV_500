@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background"
+    android:orientation="vertical">
+
+    <RadioGroup
+        android:id="@+id/radioGroupSrcSelect"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+
+        <RadioButton
+            android:id="@+id/radioButtonCD"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="CD" />
+
+        <RadioButton
+            android:id="@+id/radioButtonUSB"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="USB" />
+
+        <RadioButton
+            android:id="@+id/radioButtonIpod"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="iPod" />
+
+        <RadioButton
+            android:id="@+id/radioButtonBTMusic"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="BT Music" />
+
+        <RadioButton
+            android:id="@+id/radioButtonAux"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Aux" />
+    </RadioGroup>
+</LinearLayout>
